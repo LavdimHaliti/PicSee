@@ -20,6 +20,10 @@ import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.Response
 
+/**
+ * All the background work is done in the viewmodel and then handed over to the view to be displayed on the screen,
+ * in this case handling response getting the database functions, checking for internet connection etc...
+ */
 class ImageViewModel(app: Application, val imgRepository: ImageRepository) : AndroidViewModel(app) {
 
     val searchImages: MutableLiveData<Resource<ImageEnities>> = MutableLiveData()
@@ -82,6 +86,7 @@ class ImageViewModel(app: Application, val imgRepository: ImageRepository) : And
         }
     }
 
+    //This method can be used in future project as well to check for internet connection
     private fun hasInternetConnection(): Boolean {
 
         val connectivityManager = getApplication<ImageApplication>().getSystemService(

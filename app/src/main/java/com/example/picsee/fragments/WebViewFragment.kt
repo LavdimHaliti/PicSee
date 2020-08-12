@@ -35,7 +35,9 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+/**
+ * WebViewFragment shows the image in the website
+ */
 class WebViewFragment : Fragment() {
 
     lateinit var binding: FragmentWebViewBinding

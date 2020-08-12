@@ -36,6 +36,12 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * DetailFragment is used to provide a more detailed manner of pictures that we load from the given API
+ * We use Data binding to link layout elements with the code, and using bundle we take arguments from
+ * SearchFragment to DetailFragment.
+ * From DetailFragment we will be able to save, share, download, and view it in website
+ */
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
@@ -58,6 +64,8 @@ class DetailFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
 
+        //------------------------------------------------------------------------------------------------------------
+        //This part of code takes arguments from Search Fragment which are provided by the Entity and Hit class
         val myHits = args.hits
         Picasso
             .get()
@@ -72,7 +80,12 @@ class DetailFragment : Fragment() {
         binding.downloads.text = myHits.downloads.toString()
         binding.stars.text = myHits.favorites.toString()
         binding.views.text = myHits.views.toString()
+        //----------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------
 
+
+        //----------------------------------------------------------------------------------------------------------------
+        //This part of code shows a bottom sheet dialog which provides the properties of saving downloading sharing etc...
         val bottomSheetDialog = context?.let { BottomSheetDialog(it) }
 
         val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
@@ -107,6 +120,9 @@ class DetailFragment : Fragment() {
             findNavController().navigate(R.id.action_detailFragment_to_webViewFragment, bundle)
             bottomSheetDialog?.hide()
         }
+        //--------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------
+
 
         return binding.root
     }

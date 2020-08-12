@@ -11,6 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Here we user Retrofit that convert json data to real data
+ */
 class RetrofitInstance{
  companion object{
 
@@ -36,6 +39,9 @@ class RetrofitInstance{
  }
 }
 
+/**
+ * This interface is used to get the url in the particular order
+ */
 interface ImageApiService{
 
     @GET("/api/")

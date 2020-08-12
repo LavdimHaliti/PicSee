@@ -1,5 +1,8 @@
 package com.example.picsee.util
 
+/**
+ * These classes deal with any success or failure that might happen during the conversion of the data
+ */
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null

@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * The class hit creates the table for the database
+ */
 data class ImageEnities(
     val hits: MutableList<Hit>,
     val total: Int,

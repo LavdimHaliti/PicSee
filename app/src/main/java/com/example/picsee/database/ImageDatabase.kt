@@ -7,6 +7,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.picsee.api.Hit
 
+/**
+ * ImageDatabase class creates the database using the given table and query methods from the dao
+ */
 @Database(entities = [Hit::class], version = 3, exportSchema = false)
 abstract class ImageDatabase : RoomDatabase(){
 

@@ -32,6 +32,9 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * SearchFragment is basically used to search for different pictures based on what we search and displays them in the recyclerview
+ */
 
 class SearchFragment : Fragment() {
 
@@ -87,6 +90,7 @@ class SearchFragment : Fragment() {
             itemSelected
         }
 
+        //this part of code is used to wait a second after we have finished typing the wanted picture category
         var job: Job? = null
         binding.searchImgEditText.addTextChangedListener { editable ->
             job?.cancel()
@@ -139,6 +143,7 @@ class SearchFragment : Fragment() {
         isLoading = true
     }
 
+    //This part deals with pagination
     var isLoading = false
     var isLastPage = false
     var isScrolling = false

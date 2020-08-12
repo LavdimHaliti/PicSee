@@ -40,11 +40,12 @@ import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+/**
+ * FavoriteFragment is used to save any desired picture in the database and shows them using recyclerview
+ */
 class FavoriteFragment : Fragment() {
 
     lateinit var binding: FragmentFavoriteBinding
-    var position: Int? = null
 
     private val imgRepository by lazy {
         ImageRepository(ImageDatabase.getInstance(this.requireContext()))
@@ -85,6 +86,7 @@ class FavoriteFragment : Fragment() {
             itemSelected
         }
 
+
         imagesAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putParcelable("hits", it)
@@ -96,6 +98,7 @@ class FavoriteFragment : Fragment() {
             imagesAdapter.differ.submitList(images)
         })
 
+        //We can delete to while swiping on an item in the recyclerview using ItemTouchHelper
         val itemTouchHelperCallBack = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -116,6 +119,7 @@ class FavoriteFragment : Fragment() {
 
                 view?.let {
                     Snackbar.make(it, "Image successfully deleted", Snackbar.LENGTH_LONG).apply {
+                        //This snackbar action undoes the deletion process
                         setAction("Undo") {
                             viewModel.saveImage(image)
                         }

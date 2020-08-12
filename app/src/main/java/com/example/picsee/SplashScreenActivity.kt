@@ -7,6 +7,9 @@ import android.os.Handler
 import com.example.picsee.fragments.SearchFragment
 import kotlinx.coroutines.delay
 
+/**
+ * Shows a splash screen when the app starts
+ */
 class SplashScreenActivity : AppCompatActivity() {
 
     lateinit var handler: Handler

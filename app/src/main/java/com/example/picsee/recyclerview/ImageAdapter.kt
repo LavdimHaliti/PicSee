@@ -9,8 +9,10 @@ import com.example.picsee.R
 import com.example.picsee.api.Hit
 import com.example.picsee.databinding.ImageRecyclerviewItemBinding
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 
+/**
+ * ImageAdapter is used to create the recyclerview that will be used to display information
+ */
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
 
 
@@ -21,18 +23,17 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
 
     private lateinit var onItemClickListener: ((Hit) -> Unit)
 
-    private var onLongItemClickListener: ((Hit) -> Unit)? = null
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val imagePosition = differ.currentList[position]
-        holder.bind(imagePosition, onItemClickListener, onLongItemClickListener)
+        holder.bind(imagePosition, onItemClickListener)
 
     }
 
     class ViewHolder(private val binding: ImageRecyclerviewItemBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(image: Hit, onItemClicked: ((Hit) -> Unit), onLongItemClicked: ((Hit) -> Unit)?){
+        fun bind(image: Hit, onItemClicked: ((Hit) -> Unit)){
             binding.image = image
             Picasso.get().load(image.webformatURL).placeholder(R.drawable.progress_bar).into(binding.imageImageview)
             binding.userNameTextview.text = image.user
@@ -40,13 +41,6 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
             binding.root.setOnClickListener{
                 onItemClicked(image)
             }
-
-            binding.root.setOnLongClickListener {
-                onLongItemClicked?.let { it1 -> it1(image) }
-                true
-            }
-
-
         }
 
         companion object{
@@ -70,10 +64,6 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
 
     fun setOnItemClickListener(listener: (Hit) -> Unit) {
         onItemClickListener = listener
-    }
-
-    fun setOnItemLongClickListener(listener: (Hit) -> Unit) {
-        onLongItemClickListener = listener
     }
 
     val differ = AsyncListDiffer(this, differCallback)
